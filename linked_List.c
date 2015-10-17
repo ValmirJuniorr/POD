@@ -12,8 +12,13 @@ List *createNode() {
 void add(List *list, int number) {
     List *last;
     last = getLastElement(list);
-    last->next = createNode();
-    last->next->number = number;
+    if (last->number == 0) {
+        last->number = number;
+    } else {
+
+        last->next = createNode();
+        last->next->number = number;
+    }
 }
 
 void show(List *list) {
@@ -41,7 +46,7 @@ void positionChange(List *list, int position1, int position2) {
 int getListSize(List *list) {
     int size = 0;
     List *last = list;
-    while (last!= NULL) {
+    while (last != NULL) {
         last = last->next;
         size++;
     }
@@ -71,10 +76,13 @@ List *getLastElement(List *list) {
 }
 
 void emptyList(List* list) {
-    if (list != NULL) {
-        if (list->next != NULL) {
-            emptyList(list->next);
-            free(list);
+    List *next, *atual;
+    if (getListSize(list) > 1) {
+        atual = list->next;
+        while (atual != NULL) {
+            next = atual->next;
+            free(atual);
+            atual = next;
         }
     }
 }
@@ -107,6 +115,7 @@ void setDisorderlyList(List *list, int size) {
 
 void copyLinkedList(List *listOrigin, List *listDestination) {
     emptyList(listDestination);
+
     while (listOrigin != NULL) {
         add(listDestination, listOrigin->number);
         listOrigin = listOrigin->next;

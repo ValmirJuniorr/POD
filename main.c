@@ -28,30 +28,66 @@ double stopCount() {
 }
 
 
+void menu(List *list, List *listAux, int listSize);
 
 int main(void) {/*
     printf("\n\n*************************Vetor ordenado************************************\n\n");
     printf("\n\n*********************Vetor inversamente ordenado***************************\n\n");
-    printf("\n\n************************Vetor aleatorio************************************\n\n");*/       
-   
-    
-    int listSize=10;
-    List *list,*listAux;  
-    list=createNode();
-    listAux=createNode();
-    
-    
-    setNeatlyList(list,listSize);
-    copyLinkedList(list,listAux);
-    printf("\nOriginal -> ");
-    show(list);
-    
-    printf("\nClone   ->  ");
-    show(listAux);
-    
-    printf(" SizeOrigin: %d || SizeClone: %d\n",getListSize(list),getListSize(listAux));
-    
+    printf("\n\n************************Vetor aleatorio************************************\n\n");*/
+    int op, listSize = 10;
+    List *list, *listAux;
+    list = createNode();
+    listAux = createNode();
+    setDisorderlyList(list,listSize);
+    //setNeatlyList(list,listSize);
+    //insertionSort(list);
+    //selectionSort(list);        
+    bubbleSort(list);
+    //shellSort(list);
+
     
     return (0);
+}
+
+void menu(List *list,List *listAux, int listSize){
+    int op;
+    do {
+        printf("Esocolha a opcao: \n"
+                "[1]-Ordenada [2]-Desordenada [3]- Aleatorio [0]-Sair\n");
+        scanf("%d", &op);
+        emptyList(list);
+        emptyList(listAux);
+        switch (op) {
+            case 1:
+            {
+                setNeatlyList(list, listSize);
+                copyLinkedList(list, listAux);
+                break;
+            }
+
+            case 2:
+            {
+                setDisorderlyList(list, 10);
+                copyLinkedList(list, listAux);
+                break;
+            }
+            case 3:
+            {
+                setList(list, 10);
+                copyLinkedList(list, listAux);
+                break;
+            }
+            default:
+            {
+                printf("Escolha invalida \n");
+            }
+        }
+        printf("\nOriginal -> ");
+        show(list);
+        printf("\nClone   ->  ");
+        show(listAux);
+        printf(" SizeOrigin: %d || SizeClone: %d\n", getListSize(list), getListSize(listAux));
+    } while (op != 0);
+
 }
 
