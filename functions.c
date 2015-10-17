@@ -60,9 +60,9 @@ void bubbleSort(List *list) {
     }
 }
 
-void shellSort(List *list,int magicNumber) {
+void shellSort(List *list, int size) {
     int size = getListSize(list);
-    int i = magicNumber;
+    int i = size/2;
     int chave, k, mudou;
     while (i != 0) {
         do {
@@ -81,9 +81,45 @@ void shellSort(List *list,int magicNumber) {
         i = i / 2;
     }
 }
-/*
+
+void merge(int vetor[], int size) {
+    int mid;
+    int i, j, k;
+    int temp[size];
+    mid = size / 2;
+    i = 0;
+    j = mid;
+    k = 0;
+    while (i < mid && j < size) {
+        if (vetor[i] <= vetor[j]) {
+            temp[k] = vetor[i++];
+        } else {
+            temp[k] = vetor[j++];
+        }
+        ++k;
+    }
+
+    if (i == mid) {
+        while (j < size) {
+            temp[k++] = vetor[j++];
+        }
+    } else {
+        while (i < mid) {
+            temp[k++] = vetor[i++];
+
+        }
+    }
+
+    for (i = 0; i < size; ++i) {
+        vetor[i] = temp[i];
+    }
+
+    free(temp);
+}
+
 void mergeSort(int vetor[], int size) {
     int mid;
+
     if (size > 1) {
         mid = size / 2;
         mergeSort(vetor, mid);
@@ -91,26 +127,3 @@ void mergeSort(int vetor[], int size) {
         merge(vetor, size);
     }
 }
-
-void merge(int vetor[], int size) {
-    int i, k, j, mid = size / 2;
-    int tmp[size];
-    while (i < mid && j < size) {
-        if (vetor[i] <= vetor[j])
-            tmp[k] = vetor[i++];
-        else
-            tmp[k] = vetor[j++];
-        k++;
-    }
-    if (i == mid) {
-        while (j < size)
-            tmp[k++] = vetor[j++];
-    } else {
-        while (i < mid)
-            tmp[k++] = vet[i++];
-        for (i ate tamanho) {
-            vec[i] = tmp[i]
-        }
-
-    }
-  */
