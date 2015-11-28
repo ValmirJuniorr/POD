@@ -76,14 +76,18 @@ List *getLastElement(List *list) {
 }
 
 void emptyList(List* list) {
-    List *next, *atual;
-    if (getListSize(list) > 1) {
-        atual = list->next;
-        while (atual != NULL) {
-            next = atual->next;
-            free(atual);
-            atual = next;
+    List *this=NULL,*that=NULL;
+    this=list;
+    if(list!=NULL){
+        this=list->next;
+        list->number=0;
+        while (this!=NULL) {
+            that=this;
+            this=this->next;
+            free(that);
         }
+        list->next=NULL;
+
     }
 }
 

@@ -28,53 +28,68 @@ double stopCount() {
 }
 
 
-void menu(List *list, List *listAux, int listSize);
+void menu();
+void exec(List *list, List *listAux);
 
 int main(void) {/*
-    printf("\n\n*************************Vetor ordenado************************************\n\n");
+    /*printf("\n\n*************************Vetor ordenado************************************\n\n");
     printf("\n\n*********************Vetor inversamente ordenado***************************\n\n");
-    printf("\n\n************************Vetor aleatorio************************************\n\n");*/
-    int op, listSize = 10;
-    List *list, *listAux;
-    list = createNode();
-    listAux = createNode();
-    setDisorderlyList(list,listSize);
-    //setNeatlyList(list,listSize);
-    //insertionSort(list);
-    //selectionSort(list);        
-    bubbleSort(list);
-    //shellSort(list);
+    printf("\n\n************************Vetor aleatorio************************************\n\n");
+    //menu();
+    int size = 5;
+    int vetor[] = {7, 5, 3, 5, 2};
+    printf("ola, \n");
+    quickSort(vetor, 0, size-1);,
+    int i;
+     
+    for (i = 0; i < size; i++) {
+        printf("%d , ", vetor[i]);
 
+    }
+    printf("\n , ");
+    */
+    int arraiySize=3;
+    int array[arraiySize];
+    array[0]=15;
+    array[1]=10;
+    array[2]=20;
+    
+    showArray(array,arraiySize); 
+    heapSort(array,arraiySize);
+    //minHeap(array,arraiySize,1);
+    showArray(array,arraiySize);
     
     return (0);
 }
 
-void menu(List *list,List *listAux, int listSize){
+void menu() {
     int op;
+    List *list, *listAux;
+    list = createNode();
+    listAux = createNode();
+    int listSize = 10;
     do {
         printf("Esocolha a opcao: \n"
                 "[1]-Ordenada [2]-Desordenada [3]- Aleatorio [0]-Sair\n");
         scanf("%d", &op);
-        emptyList(list);
-        emptyList(listAux);
         switch (op) {
             case 1:
             {
                 setNeatlyList(list, listSize);
-                copyLinkedList(list, listAux);
+                exec(list, listAux);
                 break;
             }
 
             case 2:
             {
                 setDisorderlyList(list, 10);
-                copyLinkedList(list, listAux);
+                exec(list, listAux);
                 break;
             }
             case 3:
             {
                 setList(list, 10);
-                copyLinkedList(list, listAux);
+                exec(list, listAux);
                 break;
             }
             default:
@@ -91,3 +106,16 @@ void menu(List *list,List *listAux, int listSize){
 
 }
 
+void exec(List *list, List *listAux) {
+    copyLinkedList(list, listAux);
+    insertionSort(listAux);
+
+    copyLinkedList(list, listAux);
+    selectionSort(listAux);
+
+    copyLinkedList(list, listAux);
+    bubbleSort(listAux);
+
+    copyLinkedList(list, listAux);
+    shellSort(listAux);
+}
